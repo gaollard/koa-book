@@ -1,0 +1,23 @@
+{
+  "name": "koa-book",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaollard/koa-book.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaollard/koa-book/issues"
+  },
+  "homepage": "https://github.com/gaollard/koa-book#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "koa": "^2.5.1"
+  }
+}
