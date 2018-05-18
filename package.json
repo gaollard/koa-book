@@ -19,7 +19,8 @@
   "homepage": "https://github.com/gaollard/koa-book#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "koa": "^2.5.1"
+    "koa": "^2.5.1",
+    "koa-router": "^7.4.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.4"
