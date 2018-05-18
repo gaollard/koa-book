@@ -53,4 +53,17 @@ router.get('/movie/:tag', async (ctx, next) => {
   }
 });
 
+router.get('/movie/subject/:id', async (ctx, next) => {
+  await next();
+  let id = ctx.params.id;
+  const movieUrl = 'https://api.douban.com/v2/movie/subject/';
+  try {
+    let res = await axios.get(`${movieUrl}${id}`);
+    ctx.body = res.data;
+  } catch (e) {
+    ctx.body = 'error';
+    console.log(e.Error);
+  }
+});
+
 module.exports = router;
