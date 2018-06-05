@@ -66,4 +66,11 @@ router.get('/movie/subject/:id', async (ctx, next) => {
   }
 });
 
+// 获取书籍列表
+router.get('*', async (ctx, next) => {
+  await ctx.render('index', {
+    name: '拉德影视'
+  })
+});
+
 module.exports = router;
