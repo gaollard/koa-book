@@ -95,6 +95,14 @@ router.post('/user/register', async (ctx, next) => {
   ctx.body = ret;
 });
 
+// 用户注册
+router.post('/user/login', async (ctx, next) => {
+  await next()
+  const { mobile, password } = ctx.request.body
+  let ret = await userService.login({mobile, password})
+  ctx.body = ret;
+});
+
 // 获取用户信息
 router.post('/user/getUserInfo', async (ctx, next) => {
   await next();

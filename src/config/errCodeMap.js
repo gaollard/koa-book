@@ -14,5 +14,9 @@ module.exports = {
   USER_NOT_REGISTER: {
     code: '10003',
     msg: '用户未注册'
+  },
+  LOGIN_PWD_ERROR: {
+    code: '10004',
+    msg: '登录密码错误'
   }
 }
