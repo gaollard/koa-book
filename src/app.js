@@ -1,9 +1,13 @@
-const Koa = require('koa');
-const app = new Koa();
-const router = require('./router/index');
-const views = require('koa-views');
+const Koa = require('koa')
+const app = new Koa()
+const router = require('./router/index')
+const views = require('koa-views')
 const basePath = 'https://api.douban.com/v2/'
-const serve = require("koa-static");
+const serve = require("koa-static")
+const bodyParser = require('koa-bodyparser')
+
+require('./database/mongodb')
+require('./database/redis')
 
 // 配置viws
 app.use(views(`${__dirname}/views`, {
@@ -11,15 +15,17 @@ app.use(views(`${__dirname}/views`, {
     html: 'nunjucks'
   },
   extension: 'html'
-}));
+}))
 
-app.use(serve(__dirname+ "/public"));
+app.use(serve(__dirname+ "/public"))
 
-app.use(router.routes());
+app.use(bodyParser())
+
+app.use(router.routes())
 
 app.use(async (ctx, next) => {
-  await next();
-  ctx.set('Access-Control-Allow-Origin', '*');
+  await next()
+  ctx.set('Access-Control-Allow-Origin', '*')
 });
 
-app.listen(3002);
+app.listen(3002)
