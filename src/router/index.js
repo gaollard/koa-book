@@ -121,7 +121,16 @@ router.delete('/brand', async (ctx, next) => {
  */
 router.get('/product', async (ctx, next) => {
   await next()
-  let ret = await brandService.clear()
+  let ret = await productService.list()
+  ctx.body = ret;
+});
+
+/**
+ * 获取产品列表
+ */
+router.post('/product', async (ctx, next) => {
+  await next()
+  let ret = await productService.add2()
   ctx.body = ret;
 });
 

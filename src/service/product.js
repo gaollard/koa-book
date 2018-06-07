@@ -66,18 +66,12 @@ module.exports = {
 
   async add2 () {
     try {
-      await productSchema.insert({
-        brandName,
-        brandId,
-        brandLogo,
-        categoryId,
-        categoryName
-      })
+      await productSchema.insertMany(productData)
       return errCodeMap.SUCCESS
     } catch (e) {
       return {
         code: '1',
-        msg: '新增品牌失败',
+        msg: '新增机型失败',
         data: null
       }
     }
