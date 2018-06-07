@@ -23,13 +23,13 @@ app.use(serve(__dirname+ "/public"))
 // Body解析
 app.use(bodyParser({multipart: true}))
 
-// 路由
-app.use(router.routes())
-
 // 允许跨域访问
 app.use(async (ctx, next) => {
-  await next()
   ctx.set('Access-Control-Allow-Origin', '*')
+  await next()
 });
+
+// 路由
+app.use(router.routes())
 
 app.listen(3002)

@@ -1,9 +1,12 @@
-const router = require('koa-router')()
-const axios = require('axios')
-const categoryService = require('../service/category')
-const userService = require('../service/user')
-const multer = require('koa-multer')
 const path = require('path')
+const axios = require('axios')
+const router = require('koa-router')()
+const multer = require('koa-multer')
+
+const categoryService = require('../service/category')
+const brandService = require('../service/brand')
+const userService = require('../service/user')
+const productService = require('../service/product')
 
 axios.defaults.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'
 
@@ -86,6 +89,39 @@ router.post('/category', async (ctx, next) => {
 router.delete('/category', async (ctx, next) => {
   await next()
   let ret = await categoryService.clear()
+  ctx.body = ret;
+});
+
+router.post('/brand', async (ctx, next) => {
+  await next()
+  let ret = await brandService.add2()
+  ctx.body = ret;
+});
+
+/**
+ * 获取品牌列表
+ */
+router.get('/brand', async (ctx, next) => {
+  await next()
+  let ret = await brandService.list()
+  ctx.body = ret;
+});
+
+/**
+ * 清除无效的品牌
+ */
+router.delete('/brand', async (ctx, next) => {
+  await next()
+  let ret = await brandService.clear()
+  ctx.body = ret;
+});
+
+/**
+ * 获取产品列表
+ */
+router.get('/product', async (ctx, next) => {
+  await next()
+  let ret = await brandService.clear()
   ctx.body = ret;
 });
 
