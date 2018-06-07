@@ -1,20 +1,16 @@
 const categorySchema = require('../schema/category')
+const errCodeMap = require('../config/errCodeMap')
 
 module.exports = {
 
   // 列表
   async list () {
-    return await categorySchema.find({})
-  },
-
-  // 详情
-  async detail () {
-
-  },
-
-  // 更新
-  async update () {
-
+    const categorys = await categorySchema.find({})
+    return Object.assign({
+      data: {
+        categorys
+      }
+    }, errCodeMap.SUCCESS)
   },
 
   // 增加
