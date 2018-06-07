@@ -2,6 +2,8 @@ const router = require('koa-router')()
 const axios = require('axios')
 const categoryService = require('../service/category')
 const userService = require('../service/user')
+const multer = require('koa-multer')
+const path = require('path')
 
 axios.defaults.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'
 
@@ -110,6 +112,31 @@ router.post('/user/getUserInfo', async (ctx, next) => {
   let ret = await userService.getUserInfo({ loginToken })
   ctx.body = ret;
 })
+
+const storage = multer.diskStorage({
+  destination (req, file, cb) {
+    cb(null, path.resolve('/data/static/uploads'))
+  },
+  filename (req, file, cb) {
+    let date = new Date().getTime();
+    cb(null, `${date}-${file.fieldname}.png`);
+  }
+});
+
+const upload = multer({ storage })
+
+// // 头像上传
+router.post('/user/upload', upload.single('avatar'), async (ctx, next) => {
+  await next();
+  console.log(ctx.req.file);
+  ctx.body = {
+    code: '0',
+    msg: 'ok',
+    data: {
+      url: `/uploads/${ctx.req.file.filename}`
+    }
+  }
+});
 
 // 获取书籍列表
 router.get('*', async (ctx, next) => {

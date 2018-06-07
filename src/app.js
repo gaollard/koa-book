@@ -21,7 +21,7 @@ app.use(views(`${__dirname}/views`, {
 app.use(serve(__dirname+ "/public"))
 
 // Body解析
-app.use(bodyParser())
+app.use(bodyParser({multipart: true}))
 
 // 路由
 app.use(router.routes())
