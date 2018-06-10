@@ -71,7 +71,8 @@ module.exports = {
     const loginToken = await this._createAndSetLoginToken(mobile)
     return Object.assign({
       data: {
-        loginToken
+        loginToken,
+        userInfo: existFind[0]
       }
     }, errCodeMap.SUCCESS)
   },
