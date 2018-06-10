@@ -122,7 +122,7 @@ router.delete('/brand', async (ctx, next) => {
 router.get('/product', async (ctx, next) => {
   await next()
   let ret = await productService.list()
-  ctx.body = ret;
+  ctx.body = ret
 });
 
 /**
@@ -131,7 +131,18 @@ router.get('/product', async (ctx, next) => {
 router.post('/product', async (ctx, next) => {
   await next()
   let ret = await productService.add2()
-  ctx.body = ret;
+  ctx.body = ret
+});
+
+/**
+ * 获取商品信息
+ */
+router.get('/product/:productId', async (ctx, next) => {
+  await next()
+  console.log(ctx.params)
+  const { productId } = ctx.params
+  let ret = await productService.getProductInfo({productId})
+  ctx.body = ret
 });
 
 // 用户注册

@@ -27,8 +27,9 @@ const userTable = {
   updateTime: {
     type: Date,
     default: Date.now
-  }
+  },
+  ...mixin
 }
 
-Object.assign(userTable, mixin)
-module.exports = mongoose.model('book_user', new mongoose.Schema(userTable))
+const schema = new mongoose.Schema(userTable);
+module.exports = mongoose.model('book_user', schema)
