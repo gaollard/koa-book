@@ -26,6 +26,7 @@
     "koa-static": "^4.0.3",
     "koa-views": "^6.1.4",
     "mongoose": "^5.1.4",
+    "mysql": "^2.15.0",
     "nunjucks": "^3.1.2",
     "redis": "^2.8.0",
     "utility": "^1.13.1"
