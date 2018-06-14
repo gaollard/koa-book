@@ -18,5 +18,9 @@ module.exports = {
   LOGIN_PWD_ERROR: {
     code: '10004',
     msg: '登录密码错误'
+  },
+  ADD_CATE_ERROR: {
+    code: '10005',
+    msg: '新增类目失败'
   }
 }

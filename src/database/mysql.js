@@ -1,16 +1,25 @@
 const mysql = require('mysql')
+const config = require('../config')
 
-const connection = mysql.createConnection({
-  host: '39.108.138.156',
-  user: 'root',
-  password: 'gaoxiong123.',
-  database: 'mall',
-  port: 3306
-})
-
-console.log(connection);
-
-connection.query('SELECT * FROM mall_product', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
+const pool = mysql.createPool({
+  host     : config.database.mysql.host,
+  user     : config.database.mysql.user,
+  port     : config.database.mysql.port,
+  password : config.database.mysql.password,
+  database : config.database.mysql.database
 });
+
+module.exports = (sqlStr) => {
+  return new Promise((resolve, reject) => {
+    pool.getConnection(function(error, connection){
+      connection.query(sqlStr, (err, rows) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(rows)
+        }
+        connection.release()
+      })
+    })
+  })
+}

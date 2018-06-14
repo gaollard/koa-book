@@ -81,8 +81,8 @@ router.get('/category', async (ctx, next) => {
 
 router.post('/category', async (ctx, next) => {
   await next()
-  const { categoryName, categoryId, categoryLogo } = ctx.request.body
-  let ret = await categoryService.add({ categoryName, categoryId, categoryLogo})
+  const { categoryName, categoryLogo } = ctx.request.body
+  let ret = await categoryService.add({ categoryName, categoryLogo})
   ctx.body = ret;
 });
 
