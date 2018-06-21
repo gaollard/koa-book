@@ -3,6 +3,7 @@ const axios = require('axios')
 const router = require('koa-router')()
 const multer = require('koa-multer')
 
+const commonService = require('../service/common')
 const categoryService = require('../service/category')
 const brandService = require('../service/brand')
 const userService = require('../service/user')
@@ -166,6 +167,14 @@ router.post('/user/getUserInfo', async (ctx, next) => {
   await next();
   let { loginToken } = ctx.request.body
   let ret = await userService.getUserInfo({ loginToken })
+  ctx.body = ret;
+})
+
+
+// 获取顺丰地址
+router.get('/common/city', async (ctx, next) => {
+  await next();
+  let ret = await commonService.getCity()
   ctx.body = ret;
 })
 
