@@ -23,8 +23,20 @@ module.exports = {
    * 判断密码是否正确
    */
   async _isPwdCorrect (mobile, password) {
+    let list = await userSchema.find({ mobile })
+    console.log(list)
     let findList = await userSchema.find({ mobile, password: utils.encodePwd(password) })
     return findList.length === 0 ? false : true
+  },
+
+  // 用户列表
+  async list () {
+    let list = await userSchema.find()
+    return Object.assign({
+      data: {
+        list: list
+      }
+    }, errCodeMap.SUCCESS)
   },
 
   /**
@@ -32,7 +44,7 @@ module.exports = {
    * @param username 用户昵称
    * @param mobile 手机号码
    * @param password 用户密码
-   * @param {*} param0 
+   * @param {*} param0
    */
   async register ({username, mobile, password}) {
     let userExist = await userSchema.find({ mobile })
@@ -55,7 +67,7 @@ module.exports = {
    * 用户登录
    * @param mobile 手机号码
    * @param password 登录密码
-   * @param {*} param0 
+   * @param {*} param0
    */
   async login ({mobile, password}) {
     let existFind = await userSchema.find({ mobile })
@@ -64,6 +76,7 @@ module.exports = {
       return errCodeMap.USER_NOT_REGISTER
     }
     const isPwdCorrent = await this._isPwdCorrect(mobile, password)
+    console.log(isPwdCorrent)
     if (!isPwdCorrent) {
       // 密码不正确
       return errCodeMap.LOGIN_PWD_ERROR
@@ -79,7 +92,7 @@ module.exports = {
 
   /**
    * 获取用户信息
-   * @param {*} param0 
+   * @param {*} param0
    */
   async getUserInfo ({ loginToken }) {
     let mobile = await redisHandle.getAsync(loginToken);
@@ -95,9 +108,9 @@ module.exports = {
 
   /**
    * 更新用户信息
-   * @param {*} param0 
+   * @param {*} param0
    */
   async updateUserInfo ({loginToken, username, avatarUrl}) {
-    
+
   }
 }

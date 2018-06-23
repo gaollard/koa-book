@@ -146,6 +146,13 @@ router.get('/product/:productId', async (ctx, next) => {
   ctx.body = ret
 });
 
+// 用户列表
+router.get('/user', async (ctx, next) => {
+  await next()
+  let ret = await userService.list()
+  ctx.body = ret;
+});
+
 // 用户注册
 router.post('/user/register', async (ctx, next) => {
   await next()
