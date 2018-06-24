@@ -14,17 +14,22 @@ module.exports = {
   },
 
   // 增加
-  async add ({brandName, brandId, brandLogo, categoryId, categoryName}) {
+  async add ({productName, brandName, brandId, productLogo, categoryId, categoryName}) {
+    const all = await productSchema.find({})
+    const productId = all.length + 1
+    console.log(productId, productName, brandId)
     try {
-      await productSchema.insert({
-        brandName,
+      let ret = await productSchema.insertMany([{
+        productName,
+        productId,
         brandId,
-        brandLogo,
+        brandName,
         categoryId,
         categoryName
-      })
+      }])
       return errCodeMap.SUCCESS
     } catch (e) {
+      console.log(e)
       return {
         code: '1',
         msg: '新增品牌失败',
