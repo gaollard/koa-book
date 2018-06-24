@@ -26,6 +26,7 @@ app.use(bodyParser({multipart: true}))
 // 允许跨域访问
 app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Origin', '*')
+  ctx.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
   await next()
 });
 
