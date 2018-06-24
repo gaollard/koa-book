@@ -218,8 +218,8 @@ router.get('/common/city', async (ctx, next) => {
 
 const storage = multer.diskStorage({
   destination (req, file, cb) {
-    // cb(null, path.resolve('/data/wwwroot/img/productlogo'))
-    cb(null, path.resolve('/Users/arraybuffer/Desktop/uploads'))
+    cb(null, path.resolve('/data/wwwroot/img/productlogo'))
+    // cb(null, path.resolve('/Users/arraybuffer/Desktop/uploads'))
   },
   filename (req, file, cb) {
     let date = new Date().getTime();
