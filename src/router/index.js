@@ -137,7 +137,38 @@ router.get('/product', async (ctx, next) => {
  */
 router.post('/product', async (ctx, next) => {
   await next()
-  let ret = await productService.add2()
+  let {
+    productName,
+    brandId,
+    brandName,
+    categoryId,
+    categoryName,
+    productStock,
+    productSales,
+    productDescription,
+    productLogo
+  } = ctx.request.body
+  // console.log(ctx)
+  let ret = await productService.add({
+    // 商品名称
+    productName,
+    // 品牌ID
+    brandId,
+    // 品牌名称
+    brandName,
+    // 类目名称
+    categoryName,
+    // 类目ID
+    categoryId,
+    // 商品库存
+    productStock,
+    // 商品销量
+    productSales,
+    // 商品描述
+    productDescription,
+    // 商品LOGO
+    productLogo
+  })
   ctx.body = ret
 });
 
@@ -193,7 +224,8 @@ router.get('/common/city', async (ctx, next) => {
 
 const storage = multer.diskStorage({
   destination (req, file, cb) {
-    cb(null, path.resolve('/data/static/uploads'))
+    cb(null, path.resolve('/data/wwwroot/img/productlogo'))
+    // cb(null, path.resolve('/Users/arraybuffer/Desktop/uploads'))
   },
   filename (req, file, cb) {
     let date = new Date().getTime();
@@ -206,12 +238,22 @@ const upload = multer({ storage })
 // // 头像上传
 router.post('/user/upload', upload.single('avatar'), async (ctx, next) => {
   await next();
-  console.log(ctx.req.file);
   ctx.body = {
     code: '0',
     msg: 'ok',
     data: {
       url: `/uploads/${ctx.req.file.filename}`
+    }
+  }
+});
+
+router.post('/product/upload', upload.single('file'), async (ctx, next) => {
+  await next();
+  ctx.body = {
+    code: '0',
+    msg: 'ok',
+    data: {
+      url: `/productlogo/${ctx.req.file.filename}`
     }
   }
 });

@@ -16,7 +16,7 @@ const productTable = {
   // 商品LOGO
   productLogo: {
     type: String,
-    default: ''
+    default: 'iPhone 6 Plus.png'
   },
   // 商品类目
   categoryId: {
