@@ -3,6 +3,8 @@ const axios = require('axios')
 const router = require('koa-router')()
 const multer = require('koa-multer')
 
+const controller = require('../controller/index')
+
 const commonService = require('../service/common')
 const categoryService = require('../service/category')
 const brandService = require('../service/brand')
@@ -18,24 +20,24 @@ router.get('/', async (ctx, next) => {
   })
 })
 
-// 获取书籍列表
-router.get('/book', async (ctx, next) => {
-  await next()
-  var id = ctx.params.id || 1220562
-  let res = await axios.get(`https://api.douban.com/v2/book/${id}`)
-  ctx.body = res.data
-});
+// // 获取书籍列表
+// router.get('/book', async (ctx, next) => {
+//   await next()
+//   var id = ctx.params.id || 1220562
+//   let res = await axios.get(`https://api.douban.com/v2/book/${id}`)
+//   ctx.body = res.data
+// });
 
-/**
- * 获取书籍详情
- * 1220562
- */
-router.get('/book/:id', async (ctx, next) => {
-  await next()
-  let id = ctx.params.id
-  let res = await axios.get(`https://api.douban.com/v2/book/${id}`)
-  ctx.body = res.data
-});
+// /**
+//  * 获取书籍详情
+//  * 1220562
+//  */
+// router.get('/book/:id', async (ctx, next) => {
+//   await next()
+//   let id = ctx.params.id
+//   let res = await axios.get(`https://api.douban.com/v2/book/${id}`)
+//   ctx.body = res.data
+// });
 
 /*
  * 获取电影列表
@@ -46,19 +48,23 @@ router.get('/book/:id', async (ctx, next) => {
  * @tag us_box 北美票房榜
  * @tag new_movies 新片榜
  */
+
+ console.log(111, controller)
+
 router.get('/movie/:tag', async (ctx, next) => {
-  await next()
-  let tag = ctx.params.tag
-  let start = ctx.query.start || 0
-  let count = ctx.query.count || 10
-  const movieUrl = 'https://api.douban.com/v2/movie/'
-  try {
-    let res = await axios.get(`${movieUrl}${tag}?start=${start}&count=${count}`)
-    ctx.body = res.data
-  } catch (e) {
-    ctx.body = 'error'
-    console.log(e.Error)
-  }
+  return controller.movie.list(ctx, next)
+  // await next()
+  // let tag = ctx.params.tag
+  // let start = ctx.query.start || 0
+  // let count = ctx.query.count || 10
+  // const movieUrl = 'https://api.douban.com/v2/movie/'
+  // try {
+  //   let res = await axios.get(`${movieUrl}${tag}?start=${start}&count=${count}`)
+  //   ctx.body = res.data
+  // } catch (e) {
+  //   ctx.body = 'error'
+  //   console.log(e.Error)
+  // }
 });
 
 router.get('/movie/subject/:id', async (ctx, next) => {
