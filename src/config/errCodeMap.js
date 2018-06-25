@@ -22,5 +22,13 @@ module.exports = {
   ADD_CATE_ERROR: {
     code: '10005',
     msg: '新增类目失败'
+  },
+  ADD_POST_ERROR: {
+    code: '10006',
+    msg: '添加失败'
+  },
+  POST_NOT_EXIST: {
+   code: '10007',
+   msg: '不存在'
   }
 }
