@@ -5,7 +5,10 @@ module.exports = {
 
   // 列表
   async list () {
-    const list = await postSchema.find({})
+    const list = await postSchema.find({}, {
+      html: 0,
+      markdown: 0
+    })
     return Object.assign({
       data: {
         list

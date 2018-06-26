@@ -106,16 +106,14 @@ router.get('/users', async (ctx, next) => {
 });
 
 // // 获取帖子列表
-// router.get('/post', async (ctx, next) => {
-//   await next()
-//   return controller.post.list(ctx)
-// });
+router.get('/post', async (ctx, next) => {
+  await next()
+  return controller.post.list(ctx)
+});
 
 // 获取帖子列表
-router.post('/bbbb', async (ctx, next) => {
+router.post('/post', async (ctx, next) => {
   await next()
-  console.log(1)
-  console.log(ctx.request.body)
   return controller.post.add(ctx)
 });
 
