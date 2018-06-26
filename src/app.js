@@ -1,8 +1,7 @@
 const Koa = require('koa')
 const app = new Koa()
-const router = require('./router/index')
+const router = require('./router')
 const views = require('koa-views')
-const basePath = 'https://api.douban.com/v2/'
 const serve = require("koa-static")
 const bodyParser = require('koa-bodyparser')
 
@@ -21,7 +20,7 @@ app.use(views(`${__dirname}/views`, {
 app.use(serve(__dirname+ "/public"))
 
 // Body解析
-app.use(bodyParser({multipart: true}))
+app.use(bodyParser({ multipart: true }))
 
 // 允许跨域访问
 app.use(async (ctx, next) => {

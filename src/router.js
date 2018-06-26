@@ -1,122 +1,120 @@
-const path = require('path')
-const router = require('koa-router')()
-const multer = require('koa-multer')
-const controller = require('../controller/index')
+const path = require('path');
+const router = require('koa-router')();
+const multer = require('koa-multer');
+const controller = require('./controller.js');
 
 // 書籍列表
 router.get('/book', async (ctx, next) => {
-  await next()
-  controller.book.list(ctx)
+  await next();
+  controller.book.list(ctx);
 });
 
 // 書籍詳情
 router.get('/book/:id', async (ctx, next) => {
-  await next()
-  controller.book.item(ctx)
+  await next();
+  controller.book.item(ctx);
 });
 
 // 電影列表
 router.get('/movie/:tag', async (ctx, next) => {
-  await next()
-  return controller.movie.list(ctx)
+  await next();
+  return controller.movie.list(ctx);
 });
 
 // 電影詳情
 router.get('/movie/subject/:id', async (ctx, next) => {
-  await next()
-  return controller.movie.item(ctx)
+  await next();
+  return controller.movie.item(ctx);
 });
 
 // 商品類目
 router.get('/category', async (ctx, next) => {
-  await next()
-  return controller.category.list(ctx)
+  await next();
+  return controller.category.list(ctx);
 });
 
 // 新增商品類目
 router.post('/category', async (ctx, next) => {
-  await next()
-  return controller.category.add(ctx)
+  await next();
+  return controller.category.add(ctx);
 });
 
 // 刪除所有類目
 router.delete('/category', async (ctx, next) => {
-  await next()
-  return controller.category.clear(ctx)
+  await next();
+  return controller.category.clear(ctx);
 });
 
 // 新增類目
 router.post('/brand', async (ctx, next) => {
-  await next()
-  return controller.brand.add(ctx)
+  await next();
+  return controller.brand.add(ctx);
 });
 
 // 获取品牌列表
 router.get('/brand', async (ctx, next) => {
-  await next()
-  return controller.brand.list(ctx)
+  await next();
+  return controller.brand.list(ctx);
 });
 
 // 清除无效的品牌
 router.delete('/brand', async (ctx, next) => {
-  await next()
-  return controller.brand.clear(ctx)
+  await next();
+  return controller.brand.clear(ctx);
 });
 
 // 获取产品列表
 router.get('/product', async (ctx, next) => {
-  await next()
-  return controller.product.list(ctx)
+  await next();
+  return controller.product.list(ctx);
 });
 
 // 获取产品列表
 router.post('/product', async (ctx, next) => {
-  await next()
-  return controller.product.add(ctx)
+  await next();
+  return controller.product.add(ctx);
 });
 
 // 获取产品詳情
 router.get('/product/:productId', async (ctx, next) => {
-  await next()
-  return controller.product.item(ctx)
+  await next();
+  return controller.product.item(ctx);
 });
 
 // 用户注册
 router.post('/user/register', async (ctx, next) => {
-  await next()
-  return controller.user.register(ctx)
+  await next();
+  return controller.user.register(ctx);
 });
 
 // 用户登錄
 router.post('/user/login', async (ctx, next) => {
-  await next()
-  return controller.user.login(ctx)
+  await next();
+  return controller.user.login(ctx);
 });
 
 // 获取用户信息
 router.post('/user/info', async (ctx, next) => {
   await next();
-  return controller.user.getUserInfo(ctx)
+  return controller.user.getUserInfo(ctx);
 })
 
 // 用户列表
 router.get('/users', async (ctx, next) => {
-  await next()
-  return controller.user.list(ctx)
+  await next();
+  return controller.user.list(ctx);
 });
 
 // // 获取帖子列表
-// router.get('/post', async (ctx, next) => {
-//   await next()
-//   return controller.post.list(ctx)
-// });
+router.get('/post', async (ctx, next) => {
+  await next();
+  return controller.post.list(ctx);
+});
 
 // 获取帖子列表
-router.post('/bbbb', async (ctx, next) => {
-  await next()
-  console.log(1)
-  console.log(ctx.request.body)
-  return controller.post.add(ctx)
+router.post('/post', async (ctx, next) => {
+  await next();
+  return controller.post.add(ctx);
 });
 
 // 获取顺丰地址
@@ -159,5 +157,15 @@ router.post('/product/upload', upload.single('file'), async (ctx, next) => {
     }
   }
 });
+
+router.get('/postTag', async (ctx, next) => {
+  await next();
+  return controller.postTag.list(ctx);
+});
+
+router.post('/postTag', async (ctx, next) => {
+  await next();
+  return controller.postTag.add(ctx);
+})
 
 module.exports = router;

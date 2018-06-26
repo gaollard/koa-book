@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gaollard/koa-book.git"
+    "url": "git+https://github.com/gaollard/koa-mall.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gaollard/koa-book/issues"
+    "url": "https://github.com/gaollard/koa-mall/issues"
   },
-  "homepage": "https://github.com/gaollard/koa-book#readme",
+  "homepage": "https://github.com/gaollard/koa-mall#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "koa": "^2.5.1",
