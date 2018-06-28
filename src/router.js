@@ -90,6 +90,7 @@ router.post('/user/register', async (ctx, next) => {
 // 用户登錄
 router.post('/user/login', async (ctx, next) => {
   await next();
+  console.log(ctx.request.body)
   return controller.user.login(ctx);
 });
 
@@ -105,7 +106,7 @@ router.get('/users', async (ctx, next) => {
   return controller.user.list(ctx);
 });
 
-// // 获取帖子列表
+// 获取帖子列表
 router.get('/post', async (ctx, next) => {
   await next();
   return controller.post.list(ctx);
@@ -115,6 +116,24 @@ router.get('/post', async (ctx, next) => {
 router.post('/post', async (ctx, next) => {
   await next();
   return controller.post.add(ctx);
+});
+
+// 获取帖子信息
+router.get('/post/:postId', async (ctx, next) => {
+  await next();
+  return controller.post.item(ctx);
+});
+
+// 更新文章信息
+router.post('/post/:postId', async (ctx, next) => {
+  await next();
+  return controller.post.update(ctx);
+});
+
+// 获取帖子信息
+router.delete('/post', async (ctx, next) => {
+  await next();
+  return controller.post.clear(ctx);
 });
 
 // 获取顺丰地址

@@ -6,6 +6,13 @@ module.exports = {
     ctx.body = ret;
   },
 
+  async item (ctx) {
+    const postId = ctx.params.postId
+    const ret = await postService.item({ postId })
+    console.log(ret)
+    ctx.body = ret
+  },
+
   async add (ctx) {
     console.log(ctx.request.body)
     const { title, html, markdown } = ctx.request.body;
@@ -20,8 +27,14 @@ module.exports = {
   },
 
   async update (ctx) {
-    const { title, html, narkdown, postId } = ctx.request.body;
-    let ret = await postService.update({ title, html, narkdown, postId });;
+    const { postId }  = ctx.params;
+    const { title, html, markdown } = ctx.request.body;
+    let ret = await postService.update({ title, html, markdown, postId });;
+    ctx.body = ret;
+  },
+
+  async clear (ctx) {
+    let ret = await postService.clear();;
     ctx.body = ret;
   }
 }

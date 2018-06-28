@@ -34,7 +34,7 @@ module.exports = {
     const item = list[0]
     if (item) {
       return Object.assign({
-        data: { ...item }
+        data: item
       }, errMap.SUCCESS)
     } else {
       return Object.assign(errMap.POST_NOT_EXIST)
@@ -43,6 +43,20 @@ module.exports = {
 
   // 删除脏数据
   async clear () {
-    return await postSchema.remove({productId: ''})
+    return await postSchema.remove({ title: '' })
+  },
+
+  // 更新信息
+  async update ({ postId, title, markdown }) {
+    console.log({postId, title, markdown})
+    try {
+      let ret = await postSchema.update(
+        { postId },
+        { title, markdown }
+      )
+      return Object.assign(errMap.SUCCESS)
+    } catch (e) {
+      return Object.assign(errMap.POST_NOT_EXIST)
+    }
   }
 }
